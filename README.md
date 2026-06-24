@@ -629,126 +629,118 @@ Step 4 concludes with a comprehensive summary covering:
 
 ## Project Structure
 
-index.html
-script.js
-style.css
-
-js/
-├── calculations.js
-├── router.js
-├── state.js
-├── translator.js
-│
-└── components/
-    ├── resume-modal.js
-    │
-    ├── reports/
-    │   ├── report1.js
-    │   ├── report2.js
-    │   ├── report3.js
-    │   └── report4.js
-    │
-    ├── step1/
-    │   ├── question1-1.js
-    │   ├── question1-2-1.js
-    │   ├── question1-2-1a.js
-    │   ├── question1-2-1b.js
-    │   ├── question1-2-2.js
-    │   ├── question1-2-3.js
-    │   ├── question1-2-4.js
-    │   ├── question1-3-1.js
-    │   ├── question1-3-1a.js
-    │   ├── question1-3-1b.js
-    │   ├── question1-3-2a.js
-    │   ├── question1-3-2b.js
-    │   ├── question1-3-3.js
-    │   ├── question1-3-4.js
-    │   ├── question1-3-5.js
-    │   ├── question1-4-1.js
-    │   ├── question1-4-2.js
-    │   └── question1-4-3.js
-    │
-    ├── step2/
-    │   ├── question2-1.js
-    │   ├── question2-1a.js
-    │   ├── question2-1b.js
-    │   ├── question2-2.js
-    │   ├── question2-2a.js
-    │   ├── question2-3.js
-    │   ├── question2-5.js
-    │   ├── question2-5a.js
-    │   ├── question2-6.js
-    │   ├── question2-8.js
-    │   ├── question2-8-detail.js
-    │   ├── question2-8a.js
-    │   ├── question2-8b.js
-    │   ├── question2-8c.js
-    │   ├── question2-9.js
-    │   ├── question2-13.js
-    │   ├── question2-13a.js
-    │   ├── question2-13b.js
-    │   ├── question2-13c.js
-    │   ├── question2-13d.js
-    │   ├── question2-13e.js
-    │   ├── question2-13f.js
-    │   ├── question2-13g.js
-    │   ├── question2-13h.js
-    │   ├── question2-13i.js
-    │   ├── question2-14.js
-    │   ├── question2-15.js
-    │   ├── question2-16.js
-    │   ├── question2-16a.js
-    │   └── question2-geometry.js
-    │
-    ├── step3/
-    │   ├── question3-0.js
-    │   ├── question3-1.js
-    │   ├── question3-2.js
-    │   ├── question3-4.js
-    │   ├── question3-5.js
-    │   ├── question3-6.js
-    │   ├── question3-7.js
-    │   ├── question3-7a.js
-    │   ├── question3-7b.js
-    │   ├── question3-8.js
-    │   ├── question3-8-design.js
-    │   ├── question3-9.js
-    │   ├── question3-10.js
-    │   ├── question3-11.js
-    │   ├── question3-12.js
-    │   └── question3-13.js
-    │
-    └── step4/
-        ├── question4-1.js
-        ├── question4-1a.js
-        ├── question4-2.js
-        ├── question4-2-estimated.js
-        ├── question4-2-precise.js
-        ├── question4-2-gas.js
-        ├── question4-3.js
-        ├── question4-3-solid.js
-        ├── question4-3-gas.js
-        ├── question4-5.js
-        ├── question4-6.js
-        ├── question4-6-results.js
-        ├── question4-7.js
-        ├── question4-8.js
-        ├── question4-9.js
-        ├── question4-10.js
-        ├── question4-11.js
-        ├── question4-12.js
-        ├── question4-13.js
-        ├── question4-14.js
-        ├── question4-15.js
-        ├── question4-16.js
-        ├── question4-17.js
-        ├── question4-18.js
-        ├── question4-19.js
-        └── question4-20.js
-
-locales/
-├── en.json
-└── fa.json
+- index.html
+- script.js
+- style.css
+- js/
+  - calculations.js
+  - router.js
+  - state.js
+  - translator.js
+  - components/
+    - resume-modal.js
+    - reports/
+      - report1.js
+      - report2.js
+      - report3.js
+      - report4.js
+    - step1/
+      - question1-1.js
+      - question1-2-1.js
+      - question1-2-1a.js
+      - question1-2-1b.js
+      - question1-2-2.js
+      - question1-2-3.js
+      - question1-2-4.js
+      - question1-3-1.js
+      - question1-3-1a.js
+      - question1-3-1b.js
+      - question1-3-2a.js
+      - question1-3-2b.js
+      - question1-3-3.js
+      - question1-3-4.js
+      - question1-3-5.js
+      - question1-4-1.js
+      - question1-4-2.js
+      - question1-4-3.js
+    - step2/
+      - question2-1.js
+      - question2-1a.js
+      - question2-1b.js
+      - question2-2.js
+      - question2-2a.js
+      - question2-3.js
+      - question2-5.js
+      - question2-5a.js
+      - question2-6.js
+      - question2-8.js
+      - question2-8-detail.js
+      - question2-8a.js
+      - question2-8b.js
+      - question2-8c.js
+      - question2-9.js
+      - question2-13.js
+      - question2-13a.js
+      - question2-13b.js
+      - question2-13c.js
+      - question2-13d.js
+      - question2-13e.js
+      - question2-13f.js
+      - question2-13g.js
+      - question2-13h.js
+      - question2-13i.js
+      - question2-14.js
+      - question2-15.js
+      - question2-16.js
+      - question2-16a.js
+      - question2-geometry.js
+    - step3/
+      - question3-0.js
+      - question3-1.js
+      - question3-2.js
+      - question3-4.js
+      - question3-5.js
+      - question3-6.js
+      - question3-7.js
+      - question3-7a.js
+      - question3-7b.js
+      - question3-8.js
+      - question3-8-design.js
+      - question3-9.js
+      - question3-10.js
+      - question3-11.js
+      - question3-12.js
+      - question3-13.js
+    - step4/
+      - question4-1.js
+      - question4-1a.js
+      - question4-2.js
+      - question4-2-estimated.js
+      - question4-2-precise.js
+      - question4-2-gas.js
+      - question4-3.js
+      - question4-3-solid.js
+      - question4-3-gas.js
+      - question4-5.js
+      - question4-6.js
+      - question4-6-results.js
+      - question4-7.js
+      - question4-8.js
+      - question4-9.js
+      - question4-10.js
+      - question4-11.js
+      - question4-12.js
+      - question4-13.js
+      - question4-14.js
+      - question4-15.js
+      - question4-16.js
+      - question4-17.js
+      - question4-18.js
+      - question4-19.js
+      - question4-20.js
+- locales/
+  - en.json
+  - fa.json
 
 ---
 
