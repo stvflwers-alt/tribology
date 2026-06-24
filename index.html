@@ -14,13 +14,11 @@
         (function() {
             var lang = null;
             
-            // اول از مستقیم ترین جا بخون
             var directLang = localStorage.getItem('wearFailureExpertSystem_lang');
             if (directLang === 'en' || directLang === 'fa') {
                 lang = directLang;
             }
             
-            // اگر نبود، از دیتای ذخیره شده بخون
             if (!lang) {
                 try {
                     var saved = localStorage.getItem('wearFailureExpertSystem');
@@ -33,16 +31,12 @@
                 } catch(e) {}
             }
             
-            // اگر بازم نبود، از مرورگر بخون
-            if (!lang) {
-                var browserLang = navigator.language.split('-')[0];
-                lang = (browserLang === 'en') ? 'en' : 'fa';
-            }
+ if (!lang) {
+    lang = 'en';
+}
             
-            // ذخیره کن برای دفعه بعد
             localStorage.setItem('wearFailureExpertSystem_lang', lang);
             
-            // اعمال به صفحه
             if (lang === 'en') {
                 document.documentElement.setAttribute('lang', 'en');
                 document.documentElement.setAttribute('dir', 'ltr');
@@ -51,7 +45,6 @@
                 document.documentElement.setAttribute('dir', 'rtl');
             }
             
-            // ذخیره در window برای دسترسی script.js
             window.__APP_LANG__ = lang;
         })();
     </script>

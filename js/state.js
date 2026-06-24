@@ -2,7 +2,7 @@ class AppState {
     constructor() {
         this.currentStep = 1;
         this.currentQuestion = null;
-        this.language = 'fa';
+        this.language = 'en';
         this.translations = {};
         this.answers = {};
         this.flags = {};
@@ -136,12 +136,12 @@ class AppState {
     }
     // ========== ادامه کدهای قبلی ==========
     async setLanguage(lang) {
-        if (this.language === lang) return;
-        const allowedLangs = ['fa', 'en'];
-        if (!allowedLangs.includes(lang)) {
-            console.warn(`Language '${lang}' is not supported. Falling back to 'fa'.`);
-            lang = 'fa';
-        }
+    if (this.language === lang) return;
+    const allowedLangs = ['fa', 'en'];
+    if (!allowedLangs.includes(lang)) {
+        console.warn(`Language '${lang}' is not supported. Falling back to 'en'.`);
+        lang = 'en';
+    }
         this.language = lang;
         localStorage.setItem(this.langStorageKey, lang);
         if (lang === 'fa') {
@@ -281,11 +281,11 @@ class AppState {
             if (!saved) return false;
             const data = JSON.parse(saved);
             const allowedLangs = ['fa', 'en'];
-            if (data.language && allowedLangs.includes(data.language)) {
-                this.language = data.language;
-            } else {
-                this.language = 'fa';
-            }
+           if (data.language && allowedLangs.includes(data.language)) {
+            this.language = data.language;
+        } else {
+            this.language = 'en';
+        }
             this.currentStep = data.currentStep || 1;
             this.currentQuestion = data.currentQuestion || null;
             this.answers = data.answers || {};
@@ -348,12 +348,12 @@ class AppState {
         this.actualHistory = [];  // ریست تاریخچه واقعی
         this.initializeFlags();
         if (keepLanguage) {
-            const allowedLangs = ['fa', 'en'];
-            if (allowedLangs.includes(currentLang)) {
-                this.language = currentLang;
-            } else {
-                this.language = 'fa';
-            }
+        const allowedLangs = ['fa', 'en'];
+        if (allowedLangs.includes(currentLang)) {
+            this.language = currentLang;
+        } else {
+            this.language = 'en';
+        }
         }
         localStorage.removeItem(this.storageKey);
     }

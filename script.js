@@ -423,39 +423,39 @@ class App {
     }
 
     async setupLanguage() {
-        let savedLang = window.__APP_LANG__;
-        if (!savedLang) {
-            savedLang = localStorage.getItem('wearFailureExpertSystem_lang');
-        }
-        if (!savedLang) {
-            try {
-                const savedData = localStorage.getItem('wearFailureExpertSystem');
-                if (savedData) {
-                    const data = JSON.parse(savedData);
-                    savedLang = data.language;
-                }
-            } catch(e) {}
-        }
-        if (savedLang === 'en') {
-            appState.language = 'en';
-            document.documentElement.setAttribute('lang', 'en');
-            document.documentElement.setAttribute('dir', 'ltr');
-        } else {
-            appState.language = 'fa';
-            document.documentElement.setAttribute('lang', 'fa');
-            document.documentElement.setAttribute('dir', 'rtl');
-        }
-        localStorage.setItem('wearFailureExpertSystem_lang', appState.language);
-        if (this.languageSelect) {
-            this.languageSelect.value = appState.language;
-        }
-        await appState.loadTranslations();
-        this.updateI18nElements();
-        this.updateI18nAttributes();
-        this.updateHeaderI18n();
-        this.updateSidebarI18n();
-        this.updateFlagsI18n();
+    let savedLang = window.__APP_LANG__;
+    if (!savedLang) {
+        savedLang = localStorage.getItem('wearFailureExpertSystem_lang');
     }
+    if (!savedLang) {
+        try {
+            const savedData = localStorage.getItem('wearFailureExpertSystem');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                savedLang = data.language;
+            }
+        } catch(e) {}
+    }
+    if (savedLang === 'fa') {
+        appState.language = 'fa';
+        document.documentElement.setAttribute('lang', 'fa');
+        document.documentElement.setAttribute('dir', 'rtl');
+    } else {
+        appState.language = 'en';
+        document.documentElement.setAttribute('lang', 'en');
+        document.documentElement.setAttribute('dir', 'ltr');
+    }
+    localStorage.setItem('wearFailureExpertSystem_lang', appState.language);
+    if (this.languageSelect) {
+        this.languageSelect.value = appState.language;
+    }
+    await appState.loadTranslations();
+    this.updateI18nElements();
+    this.updateI18nAttributes();
+    this.updateHeaderI18n();
+    this.updateSidebarI18n();
+    this.updateFlagsI18n();
+}
 
     async changeLanguage(newLang) {
         if (appState.language === newLang) return;
