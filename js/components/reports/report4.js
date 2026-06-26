@@ -8,9 +8,9 @@ export function renderReport4(container) {
     const isGas = [7, 8].includes(regime);
 
     const routeNames = {
-        '1': t('summary.routeDesign') || (isEnglish ? 'Design' : 'طراحی'),
-        '2': t('summary.routeTroubleshooting') || (isEnglish ? 'Troubleshooting' : 'عیب‌یابی'),
-        '3': t('summary.routeMonitoring') || (isEnglish ? 'Monitoring' : 'پایش')
+        '1': isEnglish ? 'Design' : 'طراحی',
+        '2': isEnglish ? 'Troubleshooting' : 'عیب‌یابی',
+        '3': isEnglish ? 'Monitoring' : 'پایش'
     };
     const routeIcons = { '1': '✏️', '2': '🔧', '3': '📊' };
     const routeColors = { '1': '#1565C0', '2': '#EF6C00', '3': '#2E7D32' };
@@ -462,7 +462,7 @@ export function renderReport4(container) {
             ` : ''}
 
             <div style="text-align: center; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border-light); color: var(--text-secondary); font-size: 0.85rem;">
-                <p>${t('app.title')} © 2026</p>
+                <p>Wear & Failure Analysis Expert System © 2026</p>
                 <p style="margin-top: 4px;">${isEnglish ? 'Step 4 Report: Lubricant Selection & Management' : 'گزارش گام ۴: انتخاب و مدیریت روانکار'} – ${dateStr}</p>
                 <p style="margin-top: 8px; color: #2E7D32;">✅ ${isEnglish ? 'Analysis completed. Return to previous steps for review.' : 'تحلیل کامل شد. برای بازبینی به گام‌های قبلی مراجعه کنید.'}</p>
             </div>

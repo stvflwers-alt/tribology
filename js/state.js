@@ -9,8 +9,8 @@ class AppState {
         this.route = null;
         this.analysisStarted = false;
         this.analysisCompleted = false;
-        this.questionHistory = [];        // تاریخچه سوالات (برای رندر مجدد)
-        this.actualHistory = [];          // تاریخچه واقعی سوالاتی که کاربر دیده (برای دکمه Back)
+        this.questionHistory = [];
+        this.actualHistory = [];
         this.maxHistoryLength = 50;
         this.initializeFlags();
         this.storageKey = 'wearFailureExpertSystem';
@@ -95,60 +95,46 @@ class AppState {
             this.questionHistory = this.questionHistory.slice(-this.maxHistoryLength);
         }
     }
-    // ========== توابع جدید برای تاریخچه واقعی (دکمه Back) ==========
-    // اضافه کردن سوال به تاریخچه واقعی (فقط زمانی که کاربر واقعاً سوال را دیده)
     addToActualHistory(questionId) {
         if (!questionId) return;
-        // اگر سوال تکراری با آخرین سوال است، اضافه نکن
         if (this.actualHistory[this.actualHistory.length - 1] !== questionId) {
             this.actualHistory.push(questionId);
         }
-        // محدود کردن طول تاریخچه
         if (this.actualHistory.length > this.maxHistoryLength) {
             this.actualHistory = this.actualHistory.slice(-this.maxHistoryLength);
         }
-        // ذخیره در localStorage برای حفظ در بازگشت
         this.saveToLocalStorage();
     }
-    // گرفتن سوال قبلی واقعی (آخرین سوالی که کاربر دیده)
     getPreviousActualQuestion() {
         if (this.actualHistory.length >= 2) {
             return this.actualHistory[this.actualHistory.length - 2];
         }
         return null;
     }
-    // گرفتن کل تاریخچه واقعی
     getActualHistory() {
         return [...this.actualHistory];
     }
-    // برگشت به سوال قبلی واقعی (و حذف سوال فعلی از تاریخچه)
     goBackToActualQuestion() {
         const prev = this.getPreviousActualQuestion();
         if (prev) {
-            this.actualHistory.pop();  // حذف سوال فعلی
+            this.actualHistory.pop();
             return prev;
         }
         return null;
     }
-    // ریست تاریخچه واقعی
     resetActualHistory() {
         this.actualHistory = [];
     }
-    // ========== ادامه کدهای قبلی ==========
     async setLanguage(lang) {
-    if (this.language === lang) return;
-    const allowedLangs = ['fa', 'en'];
-    if (!allowedLangs.includes(lang)) {
-        console.warn(`Language '${lang}' is not supported. Falling back to 'en'.`);
-        lang = 'en';
-    }
+        if (this.language === lang) return;
+        const allowedLangs = ['en'];
+        if (!allowedLangs.includes(lang)) {
+            console.warn(`Language '${lang}' is not supported. Falling back to 'en'.`);
+            lang = 'en';
+        }
         this.language = lang;
         localStorage.setItem(this.langStorageKey, lang);
-        if (lang === 'fa') {
-            document.documentElement.dir = 'rtl';
-        } else {
-            document.documentElement.dir = 'ltr';
-        }
+        document.documentElement.dir = 'ltr';
         document.documentElement.lang = lang;
         await this.loadTranslations();
         this.saveToLocalStorage();
@@ -158,96 +144,32 @@ class AppState {
     }
     async loadTranslations() {
         try {
-            const response = await fetch(`./locales/${this.language}.json`);
+            const response = await fetch(`./locales/en.json`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             this.translations = await response.json();
         } catch (error) {
-            console.error(`Failed to load translations for '${this.language}':`, error);
-            if (this.language !== 'en') {
-                try {
-                    const fallbackResponse = await fetch('./locales/en.json');
-                    if (fallbackResponse.ok) this.translations = await fallbackResponse.json();
-                } catch (fallbackError) {
-                    console.error('Failed to load fallback translations:', fallbackError);
-                    this.translations = {};
-                }
-            }
+            console.error('Failed to load translations:', error);
+            this.translations = {};
         }
     }
     t(key, params = {}) {
         if (!key) return '';
-        if (typeof key === 'string' && !this.containsPersian(key)) {
-            const keys = key.split('.');
-            let value = this.translations;
-            for (const k of keys) {
-                if (value && typeof value === 'object' && k in value) {
-                    value = value[k];
-                } else {
-                    return key;
-                }
-            }
-            if (typeof value === 'object' && !Array.isArray(value)) return JSON.stringify(value);
-            if (typeof value === 'string' && params) {
-                Object.entries(params).forEach(([paramKey, paramValue]) => {
-                    value = value.replace(new RegExp(`\\{${paramKey}\\}`, 'g'), paramValue);
-                });
-            }
-            return value || key;
-        }
-        if (typeof key === 'string' && this.containsPersian(key)) {
-            const translated = this.findTranslationByPersianText(key);
-            if (translated && translated !== key) {
-                return translated;
+        const keys = key.split('.');
+        let value = this.translations;
+        for (const k of keys) {
+            if (value && typeof value === 'object' && k in value) {
+                value = value[k];
+            } else {
+                return key;
             }
         }
-        return key;
-    }
-    containsPersian(text) {
-        if (!text) return false;
-        return /[\u0600-\u06FF\uFB8A\u067E\u0686\u06AF\u200C\u200E\u200F]/.test(text);
-    }
-    findTranslationByPersianText(persianText) {
-        const normalizedPersian = this.normalizeText(persianText);
-        const searchInObject = (obj, currentPath = '') => {
-            for (const [key, value] of Object.entries(obj)) {
-                if (typeof value === 'string') {
-                    const normalizedValue = this.normalizeText(value);
-                    if (normalizedValue === normalizedPersian) {
-                        return this.getEnglishTranslation(key, currentPath);
-                    }
-                } else if (typeof value === 'object' && value !== null) {
-                    const newPath = currentPath ? `${currentPath}.${key}` : key;
-                    const result = searchInObject(value, newPath);
-                    if (result) return result;
-                }
-            }
-            return null;
-        };
-        return searchInObject(this.translations);
-    }
-    getEnglishTranslation(key, path) {
-        if (this.language === 'en' && this.translations) {
-            const keys = (path ? `${path}.${key}` : key).split('.');
-            let value = this.translations;
-            for (const k of keys) {
-                if (value && typeof value === 'object' && k in value) {
-                    value = value[k];
-                } else {
-                    return null;
-                }
-            }
-            if (typeof value === 'string') return value;
+        if (typeof value === 'object' && !Array.isArray(value)) return JSON.stringify(value);
+        if (typeof value === 'string' && params) {
+            Object.entries(params).forEach(([paramKey, paramValue]) => {
+                value = value.replace(new RegExp(`\\{${paramKey}\\}`, 'g'), paramValue);
+            });
         }
-        return null;
-    }
-    normalizeText(text) {
-        if (!text) return '';
-        return text
-            .trim()
-            .replace(/\s+/g, ' ')
-            .replace(/[‌]/g, '')
-            .replace(/[ًٌٍَُِّ]/g, '')
-            .replace(/[۰-۹]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 1728));
+        return value || key;
     }
     tFlag(flagKey) {
         return this.t(`flags.${flagKey}`) || flagKey;
@@ -264,7 +186,7 @@ class AppState {
                 analysisStarted: this.analysisStarted,
                 analysisCompleted: this.analysisCompleted,
                 questionHistory: this.questionHistory.slice(-20),
-                actualHistory: this.actualHistory.slice(-20),  // ذخیره تاریخچه واقعی
+                actualHistory: this.actualHistory.slice(-20),
                 timestamp: new Date().toISOString(),
                 version: '1.0.0'
             };
@@ -280,12 +202,7 @@ class AppState {
             const saved = localStorage.getItem(this.storageKey);
             if (!saved) return false;
             const data = JSON.parse(saved);
-            const allowedLangs = ['fa', 'en'];
-           if (data.language && allowedLangs.includes(data.language)) {
-            this.language = data.language;
-        } else {
             this.language = 'en';
-        }
             this.currentStep = data.currentStep || 1;
             this.currentQuestion = data.currentQuestion || null;
             this.answers = data.answers || {};
@@ -294,7 +211,7 @@ class AppState {
             this.analysisStarted = data.analysisStarted || false;
             this.analysisCompleted = data.analysisCompleted || false;
             this.questionHistory = data.questionHistory || [];
-            this.actualHistory = data.actualHistory || [];  // بارگذاری تاریخچه واقعی
+            this.actualHistory = data.actualHistory || [];
             this.ensureAllFlags();
             return true;
         } catch (error) {
@@ -345,15 +262,10 @@ class AppState {
         this.analysisStarted = false;
         this.analysisCompleted = false;
         this.questionHistory = [];
-        this.actualHistory = [];  // ریست تاریخچه واقعی
+        this.actualHistory = [];
         this.initializeFlags();
         if (keepLanguage) {
-        const allowedLangs = ['fa', 'en'];
-        if (allowedLangs.includes(currentLang)) {
-            this.language = currentLang;
-        } else {
             this.language = 'en';
-        }
         }
         localStorage.removeItem(this.storageKey);
     }

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="سیستم خبره تحلیل سایش و خرابی قطعات صنعتی - Wear & Failure Analysis Expert System">
+    <meta name="description" content="Wear & Failure Analysis Expert System">
     <meta name="theme-color" content="#1E2A4A">
-    <title data-i18n="app.title">سیستم خبره تحلیل سایش و خرابی قطعات صنعتی</title>
+    <title>Wear & Failure Analysis Expert System</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232E7D32'><circle cx='12' cy='12' r='10'/><path d='M12 6v6l4 2' stroke='white' stroke-width='2' fill='none'/></svg>">
@@ -31,9 +31,9 @@
                 } catch(e) {}
             }
             
- if (!lang) {
-    lang = 'en';
-}
+            if (!lang) {
+                lang = 'en';
+            }
             
             localStorage.setItem('wearFailureExpertSystem_lang', lang);
             
@@ -50,7 +50,7 @@
     </script>
 </head>
 <body>
-    <a href="#app-container" class="skip-link">پرش به محتوای اصلی</a>
+    <a href="#app-container" class="skip-link">Skip to main content</a>
     
     <header class="header">
         <div class="header-content">
@@ -59,7 +59,7 @@
                     <circle cx="12" cy="12" r="10"/>
                     <path d="M12 6v6l4 2"/>
                 </svg>
-                <h1 data-i18n="app.title">سیستم خبره تحلیل سایش و خرابی قطعات صنعتی</h1>
+                <h1>Wear & Failure Analysis Expert System</h1>
             </div>
             <div class="header-actions">
                 <div class="language-selector">
@@ -68,17 +68,16 @@
                         <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
                     </svg>
                     <select id="language-select">
-                        <option value="fa">فارسی</option>
                         <option value="en">English</option>
                     </select>
                 </div>
-                <div class="header-badge" id="header-step-badge">گام ۱ از ۴</div>
-                <button id="btn-header-reset" class="btn btn-secondary" style="display: none; font-size: 0.8rem; padding: 6px 14px;" title="شروع مجدد">
+                <div class="header-badge" id="header-step-badge">Step 1 of 4</div>
+                <button id="btn-header-reset" class="btn btn-secondary" style="display: none; font-size: 0.8rem; padding: 6px 14px;" title="Restart">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M1 4v6h6M23 20v-6h-6"/>
                         <path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
                     </svg>
-                    شروع مجدد
+                    Restart
                 </button>
             </div>
         </div>
@@ -87,42 +86,42 @@
     <div class="main-container">
         <aside class="sidebar" id="sidebar">
             <div class="progress-tracker">
-                <h3 data-i18n="app.progress">پیشرفت تحلیل</h3>
+                <h3>Analysis Progress</h3>
                 <div class="steps" id="steps-container">
                     <div class="step active" data-step="1">
-                        <div class="step-indicator">۱</div>
+                        <div class="step-indicator">1</div>
                         <div class="step-content">
-                            <span class="step-title">گام ۱: تعیین مسیر</span>
-                            <span class="step-status">در حال انجام</span>
+                            <span class="step-title">Step 1: Route Determination</span>
+                            <span class="step-status">In Progress</span>
                         </div>
                     </div>
                     <div class="step" data-step="2">
-                        <div class="step-indicator">۲</div>
+                        <div class="step-indicator">2</div>
                         <div class="step-content">
-                            <span class="step-title">گام ۲: تحلیل مکانیزم</span>
-                            <span class="step-status">در انتظار</span>
+                            <span class="step-title">Step 2: Mechanism Analysis</span>
+                            <span class="step-status">Waiting</span>
                         </div>
                     </div>
                     <div class="step" data-step="3">
-                        <div class="step-indicator">۳</div>
+                        <div class="step-indicator">3</div>
                         <div class="step-content">
-                            <span class="step-title">گام ۳: تحلیل جزئیات</span>
-                            <span class="step-status">در انتظار</span>
+                            <span class="step-title">Step 3: Detail Analysis</span>
+                            <span class="step-status">Waiting</span>
                         </div>
                     </div>
                     <div class="step" data-step="4">
-                        <div class="step-indicator">۴</div>
+                        <div class="step-indicator">4</div>
                         <div class="step-content">
-                            <span class="step-title">گام ۴: گزارش نهایی</span>
-                            <span class="step-status">در انتظار</span>
+                            <span class="step-title">Step 4: Final Report</span>
+                            <span class="step-status">Waiting</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="flags-panel">
-                <h3 data-i18n="app.activeFlags">پرچم‌های فعال</h3>
+                <h3>Active Flags</h3>
                 <div class="flag-list" id="flags-container">
-                    <span class="no-flags">بدون پرچم فعال</span>
+                    <span class="no-flags">No active flags</span>
                 </div>
             </div>
         </aside>
@@ -134,7 +133,7 @@
                         <circle cx="12" cy="12" r="10" stroke-opacity="0.3"/>
                         <path d="M12 2a10 10 0 019.95 9" stroke-linecap="round"/>
                     </svg>
-                    <p style="margin-top: 16px; color: var(--text-secondary);">در حال بارگذاری...</p>
+                    <p style="margin-top: 16px; color: var(--text-secondary);">Loading...</p>
                 </div>
             </div>
         </main>
