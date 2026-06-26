@@ -1,5 +1,7 @@
 # Tribology Expert Advisor (TEA)
 
+[![Dev.to Article](https://img.shields.io/badge/Dev.to-Read%20Article-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white)](https://dev.to/arashkabiri/i-built-a-tribology-expert-system-from-scratch-no-frameworks-no-backend-just-vanilla-javascript-5gad)
+
 <div align="center">
 
 [![Live Demo](https://img.shields.io/badge/🔗_Live_Demo-GitHub_Pages-brightgreen)](https://stvflwers-alt.github.io/tribology/)
