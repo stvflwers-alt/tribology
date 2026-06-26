@@ -759,7 +759,12 @@ The entire system runs in the browser. All calculations are performed client-sid
 
 **[→ Try TEA Live Here ←](https://stvflwers-alt.github.io/tribology/)**
 
----
+## 📝 Blog Post
+
+Read the full story behind TEA — the engineering motivation, technical challenges, 
+and lessons learned from building a tribology expert system from scratch:
+
+→ [I Built a Tribology Expert System from Scratch — No Frameworks, No Backend, Just Vanilla JavaScript](https://dev.to/arashkabiri/i-built-a-tribology-expert-system-from-scratch-no-frameworks-no-backend-just-vanilla-javascript-5gad)
 
 ## Quick Start
 
